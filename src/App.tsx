@@ -2,6 +2,7 @@ import { Suspense, lazy, useEffect } from 'react';
 import { Routes, Route, useLocation } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
 import { AnimatePresence } from 'framer-motion';
+import { Analytics } from '@vercel/analytics/react';
 import './App.css';
 
 // Lazy Load Pages for Performance
@@ -59,6 +60,7 @@ function App() {
           </Routes>
         </AnimatePresence>
       </Suspense>
+      <Analytics />
     </HelmetProvider>
   );
 }
