@@ -1,10 +1,37 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
+import { VitePWA } from 'vite-plugin-pwa';
 import { resolve } from 'path';
 
 // https://vite.dev/config/
 export default defineConfig({
-  plugins: [react()],
+  plugins: [
+    react(),
+    VitePWA({
+      registerType: 'autoUpdate',
+      includeAssets: ['favicon.png', 'apple-touch-icon.png', 'mask-icon.svg'],
+      manifest: {
+        name: 'Ashik T M | Portfolio',
+        short_name: 'Ashik T M',
+        description: 'Product & Systems Designer Portfolio',
+        theme_color: '#D4FF50',
+        background_color: '#F4F5F0',
+        display: 'standalone',
+        icons: [
+          {
+            src: 'favicon.png',
+            sizes: '192x192',
+            type: 'image/png'
+          },
+          {
+            src: 'favicon.png',
+            sizes: '512x512',
+            type: 'image/png'
+          }
+        ]
+      }
+    })
+  ],
 
   // Path aliases for cleaner imports
   resolve: {

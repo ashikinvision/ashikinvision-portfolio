@@ -198,12 +198,35 @@
     max-width: 520px;
 }
 
+/* TL;DR Section */
+.hero-tldr {
+    background: rgba(255, 255, 255, 0.5);
+    backdrop-filter: blur(10px);
+    border: 2px solid var(--charcoal, #2C2C2C);
+    border-radius: 16px;
+    padding: 24px;
+    margin-bottom: 32px;
+    box-shadow: 4px 4px 0 0 var(--charcoal, #2C2C2C);
+}
+
+.hero-tldr h3 {
+    font-family: 'Outfit', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 16px;
+    color: var(--charcoal, #2C2C2C);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
 /* Hero Stats */
 .hero-stats {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 32px;
-    margin-bottom: 32px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
 }
 
 .stat-item {

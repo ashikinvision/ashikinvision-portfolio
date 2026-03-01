@@ -103,14 +103,20 @@ const CaseStudyPage = () => {
                                     {caseStudy.overview}
                                 </p>
 
-                                <div className="hero-stats">
-                                    <div className="stat-item">
-                                        <label>My Role</label>
-                                        <span>{caseStudy.role}</span>
-                                    </div>
-                                    <div className="stat-item">
-                                        <label>Tools</label>
-                                        <span>{caseStudy.tools.join(', ')}</span>
+                                <div className="hero-tldr">
+                                    <h3>
+                                        <svg width="1.2em" height="1.2em" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                                        TL;DR
+                                    </h3>
+                                    <div className="hero-stats">
+                                        <div className="stat-item">
+                                            <label>My Role</label>
+                                            <span>{caseStudy.role}</span>
+                                        </div>
+                                        <div className="stat-item">
+                                            <label>Tools</label>
+                                            <span>{caseStudy.tools.join(', ')}</span>
+                                        </div>
                                     </div>
                                 </div>
 
