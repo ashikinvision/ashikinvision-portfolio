@@ -1,0 +1,107 @@
+/*
+   LazyImage Component Styles
+   ----------------------------------------
+   PERFORMANCE OPTIMIZED for smooth scrolling
+   Supports natural aspect ratios for masonry layouts
+*/
+
+.lazy-image {
+    position: relative;
+    overflow: hidden;
+    background: var(--color-cream-200, #EDE9E3);
+    border-radius: inherit;
+    width: 100%;
+    /* Support natural height for masonry */
+    min-height: 100px;
+
+    /* PERFORMANCE: Create separate GPU layer */
+    transform: translateZ(0);
+    contain: layout style;
+}
+
+/* Skeleton Loading State */
+.lazy-image__skeleton {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg,
+            var(--cream, #F9F7F3) 25%,
+            var(--cream-dark, #EDE9E3) 50%,
+            var(--cream, #F9F7F3) 75%);
+    background-size: 200% 100%;
+    animation: lazy-image-shimmer 1.5s ease-in-out infinite;
+    z-index: 1;
+}
+
+@keyframes lazy-image-shimmer {
+    0% {
+        background-position: 200% 0;
+    }
+
+    100% {
+        background-position: -200% 0;
+    }
+}
+
+/* Blur Placeholder - Pinterest-style LQIP */
+.lazy-image__placeholder {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: blur(20px);
+    transform: scale(1.1);
+    opacity: 0.7;
+    z-index: 2;
+}
+
+/* Hide skeleton when loaded */
+.lazy-image--loaded .lazy-image__skeleton {
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease-out;
+}
+
+/* Main Image - Natural dimensions for masonry */
+.lazy-image__img {
+    display: block;
+    width: 100%;
+    height: auto;
+    opacity: 0;
+    position: relative;
+    z-index: 3;
+    /* PERFORMANCE: GPU layer + fast transition */
+    transform: translateZ(0);
+    transition: opacity 0.3s ease-out;
+}
+
+.lazy-image--loaded .lazy-image__img {
+    opacity: 1;
+}
+
+/* Error State */
+.lazy-image--error {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 150px;
+}
+
+.lazy-image--error::after {
+    content: '⚠️';
+    font-size: 2rem;
+    opacity: 0.5;
+}
+
+/* PERFORMANCE: Reduce motion for accessibility */
+@media (prefers-reduced-motion: reduce) {
+    .lazy-image__skeleton {
+        animation: none;
+        background: var(--cream-dark, #EDE9E3);
+    }
+
+    .lazy-image__img,
+    .lazy-image--loaded .lazy-image__skeleton {
+        transition: none;
+    }
+}

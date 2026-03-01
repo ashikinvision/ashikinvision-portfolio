@@ -1,0 +1,97 @@
+.next-project-container {
+    width: 100%;
+    height: 400px;
+    position: relative;
+    overflow: hidden;
+    background: #000;
+    margin-top: 0;
+}
+
+.next-project-link {
+    display: block;
+    width: 100%;
+    height: 100%;
+    text-decoration: none;
+    position: relative;
+    color: white;
+}
+
+.next-project-image-wrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+.next-project-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.6;
+    transition: transform 0.8s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.5s ease;
+}
+
+.next-project-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom,
+            var(--bg-primary) 0%,
+            rgba(0, 0, 0, 0.4) 30%,
+            rgba(0, 0, 0, 0.7) 100%);
+    z-index: 2;
+}
+
+.next-project-content {
+    position: relative;
+    z-index: 3;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.content-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+
+.next-label {
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    opacity: 0.8;
+}
+
+.next-title {
+    font-size: clamp(2rem, 5vw, 4rem);
+    font-weight: 800;
+    margin: 0;
+    line-height: 1.1;
+}
+
+.next-action {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 500;
+    font-size: 1.1rem;
+    margin-top: 1rem;
+}
+
+.next-project-link:hover .next-project-image {
+    transform: scale(1.05);
+    opacity: 0.4;
+}
+
+.next-project-link:hover .next-title {
+    text-shadow: 0 0 30px rgba(255, 255, 255, 0.2);
+}

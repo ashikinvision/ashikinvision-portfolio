@@ -1,0 +1,150 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pulse App - Home Screen</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f9f9f9;
+      color: #333;
+      display: flex;
+      justify-content: center;
+    }
+    .mobile-frame {
+      width: 375px;
+      height: 812px;
+      border: 1px solid #aaa;
+      background: #fff;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+    .top-bar {
+      height: 60px;
+      border-bottom: 1px solid #ccc;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 16px;
+    }
+    .placeholder-circle {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: #ddd;
+    }
+    .emergency {
+      margin: 16px;
+      padding: 24px;
+      border: 1px dashed #bbb;
+      border-radius: 12px;
+      text-align: center;
+    }
+    .emergency button {
+      width: 100%;
+      padding: 20px;
+      background: #ddd;
+      border: none;
+      border-radius: 12px;
+      font-size: 18px;
+    }
+    .card {
+      margin: 8px 16px;
+      padding: 16px;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+      margin: 16px;
+    }
+    .grid-item {
+      text-align: center;
+    }
+    .grid-item .placeholder-circle {
+      margin: auto;
+      width: 40px;
+      height: 40px;
+    }
+    .bottom-nav {
+      margin-top: auto;
+      height: 60px;
+      border-top: 1px solid #ccc;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+    }
+    .annotation {
+      font-size: 12px;
+      color: #666;
+      margin-left: 8px;
+    }
+  </style>
+</head>
+<body>
+  <div class="mobile-frame">
+    <div class="top-bar">
+      <div class="placeholder-circle"></div>
+      <span>Pulse</span>
+      <div class="placeholder-circle"></div>
+    </div>
+    
+    <div class="emergency">
+      <button>SOS - Request Blood</button>
+      <div class="annotation">[Primary CTA for emergencies]</div>
+    </div>
+    
+    <div class="card">
+      <div class="placeholder-circle"></div>
+      <div>
+        <strong>Reserve & Route</strong><br />
+        <span class="annotation">[Book from bank]</span>
+      </div>
+    </div>
+    
+    <div class="card">
+      <div class="placeholder-circle"></div>
+      <div>
+        <strong>Eligibility Coach</strong><br />
+        <span class="annotation">[Check if you can donate]</span>
+      </div>
+    </div>
+    
+    <div class="grid">
+      <div class="grid-item">
+        <div class="placeholder-circle"></div>
+        <div class="annotation">History</div>
+      </div>
+      <div class="grid-item">
+        <div class="placeholder-circle"></div>
+        <div class="annotation">Rewards</div>
+      </div>
+      <div class="grid-item">
+        <div class="placeholder-circle"></div>
+        <div class="annotation">Nearby</div>
+      </div>
+      <div class="grid-item">
+        <div class="placeholder-circle"></div>
+        <div class="annotation">Profile</div>
+      </div>
+    </div>
+    
+    <div class="bottom-nav">
+      <div class="placeholder-circle"></div>
+      <div class="placeholder-circle"></div>
+      <div class="placeholder-circle"></div>
+      <div class="placeholder-circle"></div>
+    </div>
+  </div>
+</body>
+</html>
+

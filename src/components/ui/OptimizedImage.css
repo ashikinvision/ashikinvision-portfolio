@@ -1,0 +1,81 @@
+/*
+   Optimized Image Component Styles
+   ----------------------------------------
+   Lazy loading images with placeholder and transitions
+*/
+
+.optimized-image {
+    position: relative;
+    overflow: hidden;
+    background: var(--color-cream-200, #EDE9E3);
+    border-radius: inherit;
+}
+
+/* Placeholder Image (Blurred) */
+.optimized-image__placeholder {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: blur(20px);
+    transform: scale(1.1);
+    opacity: 1;
+    transition: opacity 0.3s ease;
+}
+
+.optimized-image--loaded .optimized-image__placeholder {
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* Skeleton Loader */
+.optimized-image__skeleton {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg,
+            var(--color-cream-100, #F9F7F3) 25%,
+            var(--color-cream-200, #EDE9E3) 50%,
+            var(--color-cream-100, #F9F7F3) 75%);
+    background-size: 200% 100%;
+    animation: skeleton-shimmer 1.5s infinite;
+}
+
+@keyframes skeleton-shimmer {
+    0% {
+        background-position: 200% 0;
+    }
+
+    100% {
+        background-position: -200% 0;
+    }
+}
+
+.optimized-image--loaded .optimized-image__skeleton {
+    display: none;
+}
+
+/* Actual Image */
+.optimized-image__img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+}
+
+.optimized-image--loaded .optimized-image__img {
+    opacity: 1;
+}
+
+/* Error State */
+.optimized-image--error {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.optimized-image--error .optimized-image__img {
+    opacity: 0.5;
+}

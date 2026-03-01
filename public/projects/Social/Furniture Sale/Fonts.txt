@@ -1,0 +1,13 @@
+Fonts used in this design:
+
+Font: Cantata One
+Author: Joana Correia
+Url: https://fonts.google.com/specimen/Cantata+One
+
+Font: Montserrat
+Author: Julieta Ulanovsky,Sol Matas,Juan Pablo del Peral,Jacques Le Bailly
+Url: https://fonts.google.com/specimen/Montserrat
+
+Font: Josefin Sans
+Author: Santiago Orozco
+Url: https://fonts.google.com/specimen/Josefin+Sans

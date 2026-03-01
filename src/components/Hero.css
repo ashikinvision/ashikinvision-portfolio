@@ -1,0 +1,618 @@
+/* 
+   ==========================================================================
+   HERO - PLAYFUL VIBRANT STYLES v2.0
+   Two-column layout, scaled typography, more decorations
+   ========================================================================== 
+*/
+
+.hero {
+    position: relative;
+    min-height: 100vh;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--bg-hero);
+    overflow: hidden;
+    padding: var(--space-20) 0;
+}
+
+/* 
+   🎨 COLORFUL BLOB BACKGROUNDS - Extended
+   ----------------------------------------
+*/
+.blob-container {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.blob {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    opacity: 0.6;
+    will-change: transform;
+}
+
+.blob-lime {
+    background: var(--lime-light);
+}
+
+.blob-pink {
+    background: var(--pink);
+}
+
+.blob-sky {
+    background: var(--sky);
+}
+
+.blob-yellow {
+    background: var(--yellow);
+}
+
+.blob-coral {
+    background: var(--coral);
+}
+
+/* Blob Positions & Sizes */
+.blob-1 {
+    width: 400px;
+    height: 400px;
+    top: -5%;
+    left: -5%;
+    opacity: 0.4;
+}
+
+.blob-2 {
+    width: 350px;
+    height: 350px;
+    top: 30%;
+    right: -8%;
+    opacity: 0.5;
+}
+
+.blob-3 {
+    width: 280px;
+    height: 280px;
+    bottom: 10%;
+    left: 20%;
+    opacity: 0.4;
+}
+
+.blob-4 {
+    width: 250px;
+    height: 250px;
+    bottom: 30%;
+    right: 25%;
+    opacity: 0.35;
+}
+
+.blob-5 {
+    width: 200px;
+    height: 200px;
+    top: 50%;
+    left: 50%;
+    opacity: 0.3;
+}
+
+/* 
+   📐 HERO GRID LAYOUT (Two Columns)
+   ----------------------------------------
+*/
+.hero-grid {
+    position: relative;
+    z-index: 10;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-12);
+    align-items: center;
+}
+
+/* 
+   📝 LEFT: HERO CONTENT
+   ----------------------------------------
+*/
+.hero-content {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-6);
+}
+
+/* Status Badge */
+.hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    padding: var(--space-2) var(--space-4);
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(10px);
+    border-radius: var(--radius-full);
+    font-size: var(--text-sm);
+    font-weight: 600;
+    color: var(--charcoal);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    width: fit-content;
+}
+
+.badge-dot {
+    width: 8px;
+    height: 8px;
+    background: #10B981;
+    border-radius: 50%;
+    position: relative;
+}
+
+.badge-dot::after {
+    content: "";
+    position: absolute;
+    inset: -3px;
+    border-radius: 50%;
+    background: #10B981;
+    opacity: 0.4;
+    animation: pulse-badge 2s infinite ease-out;
+}
+
+@keyframes pulse-badge {
+    0% {
+        transform: scale(0.8);
+        opacity: 0.8;
+    }
+
+    100% {
+        transform: scale(2);
+        opacity: 0;
+    }
+}
+
+/* 
+   🔤 HEADLINE - Scaled Down
+   ----------------------------------------
+*/
+.hero-headline {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    margin: 0;
+}
+
+.line {
+    display: block;
+    font-size: clamp(2.5rem, 5vw, 4.5rem);
+    /* Scaled down from 10vw */
+    font-weight: 800;
+    line-height: 1.05;
+    letter-spacing: -0.03em;
+    color: var(--charcoal);
+}
+
+.line.highlight {
+    color: var(--charcoal);
+    position: relative;
+    display: inline-block;
+}
+
+/* Underline accent instead of outline text — better readability */
+.line.highlight::after {
+    content: "";
+    position: absolute;
+    bottom: 0.05em;
+    left: -2%;
+    right: -2%;
+    height: 0.25em;
+    background: var(--white);
+    z-index: -1;
+    border-radius: 4px;
+    opacity: 0.7;
+}
+
+/* Subheadline */
+.hero-subheadline {
+    font-size: var(--text-base);
+    color: var(--charcoal-light);
+    max-width: 45ch;
+    line-height: 1.6;
+}
+
+/* 
+   🔘 CTA BUTTONS
+   ----------------------------------------
+*/
+.hero-cta {
+    display: flex;
+    gap: var(--space-4);
+    margin-top: var(--space-4);
+}
+
+.hero-cta .btn-primary {
+    background: var(--charcoal);
+    color: var(--white);
+    padding: var(--space-3) var(--space-6);
+    font-size: var(--text-sm);
+    font-weight: 600;
+    border-radius: var(--radius-full);
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    box-shadow: 0 4px 0 0 rgba(0, 0, 0, 0.3);
+    transition: all 0.2s var(--ease-bounce);
+}
+
+.hero-cta .btn-primary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 7px 0 0 rgba(0, 0, 0, 0.2);
+}
+
+.hero-cta .btn-primary .arrow {
+    transition: transform 0.3s ease;
+}
+
+.hero-cta .btn-primary:hover .arrow {
+    transform: translateX(4px);
+}
+
+.hero-cta .btn-secondary {
+    background: transparent;
+    color: var(--charcoal);
+    padding: var(--space-3) var(--space-6);
+    font-size: var(--text-sm);
+    font-weight: 600;
+    border: 2px solid var(--charcoal);
+    border-radius: var(--radius-full);
+    transition: all 0.2s ease;
+}
+
+.hero-cta .btn-secondary:hover {
+    background: var(--charcoal);
+    color: var(--white);
+}
+
+/* 
+   🖼️ RIGHT: ILLUSTRATION
+   ----------------------------------------
+*/
+.hero-visual {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.illustration-wrapper {
+    position: relative;
+    width: 100%;
+    max-width: 350px;
+    /* Scaled down from 500px */
+}
+
+.hero-illustration {
+    width: 100%;
+    height: auto;
+    filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.1));
+}
+
+/* 
+   🎬 RIVE ANIMATION CONTAINER
+   ----------------------------------------
+*/
+.hero-rive-container {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 1;
+    max-width: 420px;
+    overflow: visible;
+    /* No card styling - transparent background */
+    background: transparent;
+}
+
+.hero-rive-animation {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    z-index: 2;
+}
+
+.hero-rive-animation canvas {
+    width: 100% !important;
+    height: 100% !important;
+}
+
+/* Loading state */
+.hero-rive-loading {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    z-index: 1;
+}
+
+.rive-loading-spinner {
+    width: 48px;
+    height: 48px;
+    border: 3px solid rgba(0, 0, 0, 0.1);
+    border-top-color: var(--lime, #a3e635);
+    border-radius: 50%;
+    animation: rive-spin 1s linear infinite;
+}
+
+@keyframes rive-spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Glow effect behind animation - subtle */
+.hero-rive-glow {
+    position: absolute;
+    inset: -10%;
+    background: radial-gradient(circle at center,
+            var(--lime-light, rgba(163, 230, 53, 0.15)) 0%,
+            transparent 50%);
+    z-index: 0;
+    pointer-events: none;
+    animation: rive-glow-pulse 4s ease-in-out infinite;
+}
+
+@keyframes rive-glow-pulse {
+
+    0%,
+    100% {
+        opacity: 0.5;
+        transform: scale(1);
+    }
+
+    50% {
+        opacity: 0.8;
+        transform: scale(1.05);
+    }
+}
+
+/* Interactive hover effect - subtle lift */
+.hero-rive-container:hover .hero-rive-glow {
+    opacity: 1;
+}
+
+.hero-rive-container:hover {
+    transform: translateY(-3px) scale(1.02);
+    transition: all 0.4s var(--ease-bounce, cubic-bezier(0.34, 1.56, 0.64, 1));
+}
+
+/* Floating Decorations Around Illustration */
+.deco {
+    position: absolute;
+    font-weight: bold;
+    z-index: 5;
+}
+
+.deco-star-1 {
+    top: 5%;
+    right: 10%;
+    font-size: 2rem;
+    color: var(--pink);
+}
+
+.deco-circle-1 {
+    bottom: 20%;
+    left: -5%;
+    font-size: 1.5rem;
+    color: var(--sky);
+}
+
+.deco-diamond-1 {
+    top: 40%;
+    right: -3%;
+    font-size: 1.8rem;
+    color: var(--yellow);
+}
+
+.deco-plus-1 {
+    bottom: 10%;
+    right: 15%;
+    font-size: 2.5rem;
+    color: var(--coral);
+    font-weight: 300;
+}
+
+/* Additional decoration elements */
+.deco-star-2 {
+    bottom: 30%;
+    left: 10%;
+    font-size: 1.6rem;
+    color: var(--lime-dark);
+}
+
+.deco-triangle {
+    top: 15%;
+    left: 5%;
+    font-size: 1.4rem;
+    color: var(--coral);
+}
+
+.deco-sparkle {
+    top: 60%;
+    right: 5%;
+    font-size: 1.8rem;
+}
+
+/* 
+   ✨ EXTRA FLOATING SHAPES - Enhanced
+   ----------------------------------------
+*/
+.floating-shape {
+    position: absolute;
+    pointer-events: none;
+    z-index: 2;
+}
+
+.shape-ring {
+    width: 120px;
+    height: 120px;
+    border: 3px solid var(--pink);
+    border-radius: 50%;
+    top: 15%;
+    right: 10%;
+    opacity: 0.3;
+}
+
+.shape-dots {
+    width: 60px;
+    height: 60px;
+    background: radial-gradient(circle, var(--sky) 3px, transparent 3px);
+    background-size: 12px 12px;
+    bottom: 20%;
+    left: 8%;
+    opacity: 0.4;
+}
+
+.shape-zigzag {
+    width: 80px;
+    height: 30px;
+    background: repeating-linear-gradient(90deg,
+            var(--yellow) 0px,
+            var(--yellow) 10px,
+            transparent 10px,
+            transparent 20px);
+    top: 70%;
+    right: 5%;
+    opacity: 0.5;
+    border-radius: 4px;
+}
+
+.shape-wave {
+    width: 100px;
+    height: 20px;
+    background: linear-gradient(90deg, var(--pink), var(--sky), var(--lime));
+    border-radius: 10px;
+    bottom: 35%;
+    left: 3%;
+    opacity: 0.4;
+}
+
+.shape-cursor {
+    font-size: 2rem;
+    color: var(--coral);
+    top: 25%;
+    left: 15%;
+    opacity: 0.5;
+}
+
+.shape-cross {
+    font-size: 2rem;
+    color: var(--sky);
+    bottom: 15%;
+    right: 20%;
+    opacity: 0.4;
+}
+
+/* 
+   🎯 SCROLL HINT
+   ----------------------------------------
+*/
+.scroll-hint {
+    position: absolute;
+    bottom: var(--space-6);
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-1);
+    font-size: var(--text-xs);
+    color: var(--charcoal-light);
+}
+
+.scroll-arrow {
+    font-size: 1.2rem;
+}
+
+/* 
+   📱 RESPONSIVE
+   ----------------------------------------
+*/
+@media (max-width: 968px) {
+    .hero {
+        padding: var(--space-16) 0 var(--space-12);
+    }
+
+    .hero-grid {
+        grid-template-columns: 1fr;
+        gap: var(--space-10);
+        text-align: center;
+    }
+
+    .hero-content {
+        align-items: center;
+        order: 2;
+    }
+
+    .hero-visual {
+        order: 1;
+    }
+
+    .illustration-wrapper {
+        max-width: 350px;
+    }
+
+    .hero-rive-container {
+        max-width: 300px;
+    }
+
+    .line {
+        font-size: clamp(2rem, 8vw, 3rem);
+    }
+
+    .hero-cta {
+        flex-direction: column;
+        width: 100%;
+        max-width: unset;
+        /* Replaced restrictive 280px max-width */
+    }
+
+    .hero-cta .btn-primary,
+    .hero-cta .btn-secondary {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .blob-1 {
+        width: 250px;
+        height: 250px;
+    }
+
+    .blob-2 {
+        width: 200px;
+        height: 200px;
+    }
+
+    .blob-3 {
+        width: 180px;
+        height: 180px;
+    }
+
+    .blob-4,
+    .blob-5 {
+        display: none;
+    }
+
+    .floating-shape {
+        display: none;
+    }
+
+    .deco {
+        font-size: 1.2rem !important;
+    }
+}
+
+@media (max-width: 480px) {
+    .line {
+        font-size: clamp(1.8rem, 10vw, 2.5rem);
+    }
+
+    .hero-badge {
+        font-size: var(--text-xs);
+    }
+}

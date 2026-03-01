@@ -1,0 +1,85 @@
+/*
+   Badge Component Styles
+   ----------------------------------------
+   Playful rotated pill badges for section labels
+*/
+
+.badge {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2, 8px);
+    padding: var(--space-2, 8px) var(--space-4, 16px);
+    background: var(--color-white, #FFFFFF);
+    border: 2px solid var(--color-charcoal-900, #2C2E2A);
+    border-radius: var(--radius-full, 9999px);
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: var(--font-size-xs, 0.75rem);
+    letter-spacing: var(--letter-spacing-wide, 0.05em);
+    box-shadow: var(--shadow-hard-md, 4px 4px 0 #2C2E2A);
+    width: fit-content;
+    max-width: 100%;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+/* Rotation */
+.badge--rotated {
+    transform: rotate(-2deg);
+}
+
+.badge--rotated:hover {
+    transform: rotate(0deg);
+}
+
+/* Sizes */
+.badge--sm {
+    padding: var(--space-1, 4px) var(--space-3, 12px);
+    font-size: 0.65rem;
+}
+
+.badge--md {
+    padding: var(--space-2, 8px) var(--space-4, 16px);
+    font-size: var(--font-size-xs, 0.75rem);
+}
+
+.badge--lg {
+    padding: var(--space-3, 12px) var(--space-6, 24px);
+    font-size: var(--font-size-sm, 0.875rem);
+}
+
+/* Variants */
+.badge--default {
+    background: var(--color-white, #FFFFFF);
+    color: var(--color-charcoal-900, #2C2E2A);
+}
+
+.badge--outline {
+    background: transparent;
+    color: var(--color-charcoal-900, #2C2E2A);
+    box-shadow: none;
+    border-style: dashed;
+}
+
+.badge--accent {
+    background: var(--color-lime-500, #D4FF50);
+    color: var(--color-charcoal-900, #2C2E2A);
+    box-shadow: var(--shadow-hard-md, 4px 4px 0 #2C2E2A);
+}
+
+/* Icon */
+.badge__icon {
+    display: flex;
+    align-items: center;
+    font-size: 0.9em;
+}
+
+/* Animation on Hover */
+.badge:hover {
+    box-shadow: 6px 6px 0 var(--color-charcoal-900, #2C2E2A);
+}
+
+.badge--outline:hover {
+    background: var(--color-lime-500, #D4FF50);
+    border-style: solid;
+    box-shadow: var(--shadow-hard-sm, 2px 2px 0 #2C2E2A);
+}

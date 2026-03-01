@@ -1,0 +1,368 @@
+/* 
+   ==========================================================================
+   ASHIK VISION - PLAYFUL VIBRANT DESIGN SYSTEM v3.0
+   Inspired by: MindMarket, Duolingo, Modern Tech Brands
+   ========================================================================== 
+*/
+
+:root {
+  /* 
+     🎨 COLOR PALETTE - Vibrant & Playful
+     ----------------------------------------
+  */
+  /* Primary: Lime Green (Energetic) */
+  --lime: #D4FF50;
+  --lime-dark: #B8E036;
+  --lime-light: #E5FF8A;
+
+  /* Secondary Accents */
+  --pink: #FFAFC5;
+  --pink-dark: #FF8FAD;
+  --sky: #A8D8FF;
+  --sky-dark: #7BC4FF;
+  --yellow: #FFE066;
+  --coral: #FF7F6E;
+
+  /* Neutrals */
+  --charcoal: #2C2E2A;
+  --charcoal-light: #4A4D46;
+  --cream: #F9F7F3;
+  --cream-dark: #EDE9E3;
+  --white: #FFFFFF;
+
+  /* Semantic */
+  --bg-primary: var(--cream);
+  --bg-hero: var(--lime);
+  --bg-section-alt: var(--white);
+  --text-primary: var(--charcoal);
+  --text-secondary: var(--charcoal-light);
+  --text-inverse: var(--white);
+  --accent: var(--lime);
+  --accent-secondary: var(--pink);
+
+  /* 
+     📝 TYPOGRAPHY - Massive & Bold
+     ----------------------------------------
+  */
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+
+  /* Display Sizes (Massive for impact) */
+  --text-display: clamp(4rem, 10vw, 10rem);
+  /* 64-160px */
+  --text-hero: clamp(3rem, 8vw, 7rem);
+  /* 48-112px */
+  --text-title: clamp(2rem, 5vw, 4rem);
+  /* 32-64px */
+  --text-subtitle: clamp(1.5rem, 3vw, 2.5rem);
+  /* 24-40px */
+
+  /* Body Sizes */
+  --text-lg: clamp(1.125rem, 1.5vw, 1.375rem);
+  /* 18-22px */
+  --text-base: 1rem;
+  /* 16px */
+  --text-sm: 0.875rem;
+  /* 14px */
+  --text-xs: 0.75rem;
+  /* 12px */
+
+  /* 
+     📐 SPACING - 8px Grid
+     ----------------------------------------
+  */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-10: 40px;
+  --space-12: 48px;
+  --space-16: 64px;
+  --space-20: 80px;
+  --space-24: 96px;
+  --space-32: 128px;
+
+  --container-width: 1400px;
+  --container-padding: clamp(20px, 5vw, 64px);
+
+  /* 
+     ✨ MOTION - Playful & Elastic
+     ----------------------------------------
+  */
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-elastic: cubic-bezier(0.68, -0.6, 0.32, 1.6);
+  --ease-bounce: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ease-smooth: cubic-bezier(0.25, 0.1, 0.25, 1);
+
+  --duration-fast: 200ms;
+  --duration-normal: 400ms;
+  --duration-slow: 800ms;
+  --duration-slower: 1200ms;
+
+  /* 
+     🔘 SHAPES
+     ----------------------------------------
+  */
+  --radius-sm: 8px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+  --radius-xl: 40px;
+  --radius-full: 9999px;
+
+  --z-base: 1;
+  --z-header: 100;
+  --z-modal: 200;
+  --z-cursor: 9999;
+}
+
+/* 🌙 Dark Mode */
+[data-theme="dark"] {
+  --bg-primary: #1A1A1A;
+  --bg-hero: #2A2A2A;
+  --bg-section-alt: #242424;
+  --text-primary: #FFFFFF;
+  --text-secondary: #B0B0B0;
+  --cream: #1A1A1A;
+  --cream-dark: #242424;
+}
+
+/* 🔄 Base Reset */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  height: 100%;
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: var(--font-sans);
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  line-height: 1.5;
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* 📝 Typography Defaults */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: 700;
+  line-height: 1.0;
+  letter-spacing: -0.03em;
+  margin-bottom: var(--space-4);
+}
+
+h1 {
+  font-size: var(--text-hero);
+}
+
+h2 {
+  font-size: var(--text-title);
+}
+
+h3 {
+  font-size: var(--text-subtitle);
+}
+
+p {
+  line-height: 1.6;
+  max-width: 60ch;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+button {
+  font-family: inherit;
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+ul,
+ol {
+  list-style: none;
+}
+
+/* 📦 Container */
+.container {
+  max-width: var(--container-width);
+  margin: 0 auto;
+  padding-inline: var(--container-padding);
+}
+
+/* 🎯 Utility Classes */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
+
+/* 🔘 Buttons - Playful Style */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  padding: var(--space-4) var(--space-8);
+  background: var(--charcoal);
+  color: var(--white);
+  font-size: var(--text-base);
+  font-weight: 600;
+  border-radius: var(--radius-full);
+  transition: transform var(--duration-fast) var(--ease-elastic),
+    box-shadow var(--duration-fast) var(--ease-smooth);
+  box-shadow: 0 4px 0 0 rgba(0, 0, 0, 0.2);
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 0 0 rgba(0, 0, 0, 0.15);
+}
+
+.btn-primary:active {
+  transform: translateY(2px);
+  box-shadow: 0 2px 0 0 rgba(0, 0, 0, 0.2);
+}
+
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  padding: var(--space-4) var(--space-8);
+  background: transparent;
+  color: var(--charcoal);
+  font-size: var(--text-base);
+  font-weight: 600;
+  border: 2px solid var(--charcoal);
+  border-radius: var(--radius-full);
+  transition: all var(--duration-fast) var(--ease-smooth);
+}
+
+.btn-secondary:hover {
+  background: var(--charcoal);
+  color: var(--white);
+}
+
+/* 🌈 Gradient Text Utility */
+.gradient-text {
+  background: linear-gradient(135deg, var(--lime) 0%, var(--sky) 50%, var(--pink) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* 💫 Floating Animation */
+@keyframes float {
+
+  0%,
+  100% {
+    transform: translateY(0) rotate(0deg);
+  }
+
+  50% {
+    transform: translateY(-20px) rotate(3deg);
+  }
+}
+
+@keyframes float-reverse {
+
+  0%,
+  100% {
+    transform: translateY(0) rotate(0deg);
+  }
+
+  50% {
+    transform: translateY(20px) rotate(-3deg);
+  }
+}
+
+@keyframes blob-morph {
+
+  0%,
+  100% {
+    border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+  }
+
+  50% {
+    border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%;
+  }
+}
+
+@keyframes pulse-glow {
+
+  0%,
+  100% {
+    opacity: 0.6;
+    transform: scale(1);
+  }
+
+  50% {
+    opacity: 1;
+    transform: scale(1.05);
+  }
+}
+
+/* Selection Color */
+::selection {
+  background: var(--lime);
+  color: var(--charcoal);
+}
+
+/* ==============================
+   ACCESSIBILITY: Reduced Motion
+   ============================== */
+@media (prefers-reduced-motion: reduce) {
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ==============================
+   ACCESSIBILITY: Focus Visible
+   ============================== */
+:focus-visible {
+  outline: 2px solid var(--charcoal);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+:focus:not(:focus-visible) {
+  outline: none;
+}

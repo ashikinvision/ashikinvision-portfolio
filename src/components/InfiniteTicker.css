@@ -1,0 +1,157 @@
+/* 
+   ==========================================================================
+   INFINITE TICKER - PLAYFUL VIBRANT STYLES v2.0
+   Continuation of Hero Section - Lime Green Background
+   ========================================================================== 
+*/
+
+.ticker-section {
+    width: 100%;
+    padding: var(--space-4) 0;
+    overflow: hidden;
+    background: var(--lime);
+    position: relative;
+}
+
+/* Subtle gradient overlay for depth */
+.ticker-section::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 100px;
+    background: linear-gradient(90deg, var(--lime), transparent);
+    z-index: 2;
+    pointer-events: none;
+}
+
+.ticker-section::after {
+    content: "";
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: 100px;
+    background: linear-gradient(-90deg, var(--lime), transparent);
+    z-index: 2;
+    pointer-events: none;
+}
+
+.ticker-container {
+    width: 100%;
+    overflow: hidden;
+}
+
+.ticker-track {
+    display: flex;
+    width: max-content;
+    animation: scroll 30s linear infinite;
+    will-change: transform;
+}
+
+.ticker-track:hover {
+    animation-play-state: paused;
+}
+
+.ticker-item {
+    font-size: var(--text-sm);
+    font-weight: 700;
+    color: var(--charcoal);
+    padding: 0 var(--space-6);
+    white-space: nowrap;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    transition: color 0.3s ease;
+}
+
+.ticker-item:hover {
+    color: var(--charcoal-light);
+}
+
+/* Colorful decorative dots between items */
+.ticker-item::after {
+    content: "✦";
+    font-size: 0.6em;
+    opacity: 0.8;
+    animation: sparkle 2s ease-in-out infinite;
+}
+
+/* Alternate colors for variety - matching hero decorations */
+.ticker-item:nth-child(7n+1)::after {
+    color: var(--lime);
+    animation-delay: 0s;
+}
+
+.ticker-item:nth-child(7n+2)::after {
+    color: var(--pink);
+    animation-delay: 0.3s;
+}
+
+.ticker-item:nth-child(7n+3)::after {
+    color: var(--sky);
+    animation-delay: 0.6s;
+}
+
+.ticker-item:nth-child(7n+4)::after {
+    color: var(--yellow);
+    animation-delay: 0.9s;
+}
+
+.ticker-item:nth-child(7n+5)::after {
+    color: var(--coral);
+    animation-delay: 1.2s;
+}
+
+.ticker-item:nth-child(7n+6)::after {
+    color: var(--pink);
+    animation-delay: 1.5s;
+}
+
+.ticker-item:nth-child(7n+7)::after {
+    color: var(--lime);
+    animation-delay: 1.8s;
+}
+
+@keyframes scroll {
+    0% {
+        transform: translateX(0);
+    }
+
+    100% {
+        transform: translateX(-25%);
+    }
+}
+
+@keyframes sparkle {
+
+    0%,
+    100% {
+        opacity: 0.5;
+        transform: scale(0.8);
+    }
+
+    50% {
+        opacity: 1;
+        transform: scale(1.2);
+    }
+}
+
+@media (max-width: 768px) {
+    .ticker-section {
+        padding: var(--space-3) 0;
+    }
+
+    .ticker-item {
+        font-size: var(--text-xs);
+        padding: 0 var(--space-4);
+    }
+
+    .ticker-section::before,
+    .ticker-section::after {
+        width: 50px;
+    }
+}

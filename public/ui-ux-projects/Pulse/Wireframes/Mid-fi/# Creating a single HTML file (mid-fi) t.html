@@ -1,0 +1,389 @@
+# Creating a single HTML file (mid-fi) that includes Home (v2 style), SOS hold with radial progress,
+# Pop Card (quick request) with Auto-send / Manual Search / Cancel, and a simple Match Results skeleton.
+html = r"""<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Pulse — Home (v2) + Quick Request Pop Card — Mid‑Fi</title>
+<style>
+  :root{
+    --width:375px;
+    --bg:#f6f8fb;
+    --surface:#ffffff;
+    --muted:#6b7280;
+    --text:#081022;
+    --line:#e6eef6;
+    --shadow:0 10px 24px rgba(8,12,20,0.06);
+    --accent:#b72727;
+    --radius:12px;
+    --hold-ms:700; /* ms to trigger hold */
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);font-family:Inter,system-ui,Segoe UI,Roboto,Arial;color:var(--text);-webkit-font-smoothing:antialiased;display:flex;justify-content:center;padding:18px;}
+  .device{width:var(--width);background:var(--surface);border-radius:20px;border:1px solid var(--line);box-shadow:var(--shadow);overflow:hidden;display:flex;flex-direction:column;min-height:820px}
+  .screen{padding:14px;display:flex;flex-direction:column;flex:1}
+
+  /* Header */
+  .header{display:flex;align-items:center;justify-content:space-between;height:56px}
+  .logo{font-weight:700;font-size:18px}
+  .icons{display:flex;gap:8px}
+  .icon{width:40px;height:40;border-radius:10px;background:#f3f4f6;border:1px solid var(--line);display:grid;place-items:center;color:var(--muted)}
+
+  /* Top search row */
+  .top-row{display:flex;gap:8px;align-items:center;margin-top:8px}
+  .search{flex:1;height:44px;border-radius:10px;border:1px solid var(--line);display:flex;align-items:center;padding:8px;background:#fff}
+  .search input{border:0;outline:0;font-size:15px;width:100%}
+  .blood-chip{padding:8px 10px;border-radius:999px;border:1px solid var(--line);background:#fff;font-size:14px;cursor:pointer}
+
+  /* Hero SOS */
+  .hero{display:flex;flex-direction:column;align-items:center;gap:10px;margin-top:12px}
+  .sos-wrap{display:flex;flex-direction:column;align-items:center;gap:8px}
+  .sos{width:180px;height:180px;border-radius:999px;background:linear-gradient(180deg,#f7f9fb,#eef2f6);display:flex;align-items:center;justify-content:center;box-shadow:0 14px 30px rgba(8,12,20,0.06);border:1px solid var(--line);position:relative;cursor:pointer}
+  .sos .label{font-weight:800;font-size:16px;letter-spacing:0.3px}
+  .sos .sub{font-size:13px;color:var(--muted);margin-top:6px}
+  .sos svg{position:absolute;left:0;top:0;width:180px;height:180px;pointer-events:none}
+
+  /* linear hold bar */
+  .hold-bar{width:220px;height:8px;background:#f1f5f9;border-radius:8px;border:1px solid var(--line);overflow:hidden;margin-top:6px}
+  .hold-bar > i{display:block;height:100%;width:0%;background:linear-gradient(90deg,var(--accent),#8f1b1b);transition:width .04s linear}
+
+  .hint{font-size:13px;color:var(--muted);text-align:center;max-width:320px;padding:0 8px}
+
+  /* Quick actions */
+  .quick{margin-top:12px;width:100%}
+  .quick-scroll{display:flex;gap:12px;overflow:auto;padding-bottom:6px}
+  .card{min-width:150px;background:#fff;border-radius:12px;border:1px solid var(--line);padding:12px;box-shadow:var(--shadow);display:flex;flex-direction:column;gap:8px;align-items:flex-start}
+  .qc-icon{width:44px;height:44;border-radius:10px;background:#f3f4f6}
+  .qc-title{font-weight:700;font-size:14px}
+  .qc-sub{font-size:13px;color:var(--muted)}
+
+  /* Status */
+  .status{margin-top:12px;display:flex;flex-direction:column;gap:12px}
+  .status-card{flex:1;background:#fff;border-radius:12px;border:1px solid var(--line);padding:12px;box-shadow:var(--shadow)}
+
+  /* bottom nav */
+  .spacer{flex:1}
+  .bottom{height:76px;border-top:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:10px 14px;background:linear-gradient(180deg,rgba(255,255,255,0.6),rgba(255,255,255,0.9));}
+  .nav-item{display:flex;flex-direction:column;align-items:center;gap:6px;font-size:12px;color:var(--muted);width:64px;cursor:pointer}
+  .nav-icon{width:40px;height:40;border-radius:10px;background:#f3f4f6;border:1px solid var(--line)}
+
+  /* Pop Card (quick request) */
+  .pop-back{position:fixed;inset:0;background:rgba(6,9,14,0.28);display:none;align-items:center;justify-content:center;z-index:90}
+  .pop{width:92%;max-width:360px;background:var(--surface);border-radius:14px;padding:14px;border:1px solid var(--line);box-shadow:0 20px 40px rgba(0,0,0,0.12)}
+
+  .field{margin-top:10px;display:flex;flex-direction:column;gap:6px}
+  .input{height:44px;border-radius:10px;border:1px solid var(--line);padding:8px;background:#fff;font-size:15px}
+  .row{display:flex;gap:8px}
+  .small{font-size:13px;color:var(--muted)}
+  .btn{padding:10px 12px;border-radius:10px;border:1px solid var(--line);background:#fff;cursor:pointer}
+  .primary{background:linear-gradient(180deg,#fafafa,#f0f0f0);font-weight:700}
+
+  .switch{display:flex;align-items:center;gap:8px}
+
+  /* Results skeleton (manual path) */
+  .results{position:fixed;left:50%;transform:translateX(-50%);bottom:18px;width:92%;max-width:520px;background:#fff;border-radius:12px;border:1px solid var(--line);padding:12px;box-shadow:0 20px 40px rgba(0,0,0,0.12);display:none;z-index:95}
+  .result-card{display:flex;gap:8px;align-items:center;justify-content:space-between;padding:10px;border-radius:10px;border:1px solid var(--line);background:#fafafa;margin-top:8px}
+
+  /* toast */
+  .toast{position:fixed;left:50%;transform:translateX(-50%);bottom:90px;background:#111;color:#fff;padding:10px 14px;border-radius:8px;display:none;z-index:100}
+  .toast button{background:transparent;border:0;color:#fff;font-weight:700;margin-left:8px;cursor:pointer}
+
+  /* accessibility */
+  .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+</style>
+</head>
+<body>
+  <div class="device" role="application" aria-label="Pulse mid-fi v2 Smart SOS">
+    <div class="screen" id="homeScreen">
+      <header class="header" role="banner">
+        <div class="logo">Pulse</div>
+        <div class="icons">
+          <div class="icon" aria-hidden="true">🔔</div>
+          <div class="icon" aria-hidden="true">🙂</div>
+        </div>
+      </header>
+
+      <div class="top-row" role="region" aria-label="Search and filters">
+        <div class="search" role="search">
+          <input id="searchInput" placeholder="Search donors, banks, city..." aria-label="Search donors or banks" />
+        </div>
+        <button id="bloodChip" class="blood-chip" aria-haspopup="dialog" aria-label="Select blood type">O+</button>
+      </div>
+
+      <main>
+        <section class="hero" aria-labelledby="mainTitle">
+          <h1 id="mainTitle" class="sr-only">Pulse Home</h1>
+
+          <div class="sos-wrap">
+            <button id="sosBtn" class="sos" aria-label="Emergency SOS" aria-describedby="sosHint" aria-live="polite">
+              <svg viewBox="0 0 180 180" role="img" aria-hidden="true">
+                <circle cx="90" cy="90" r="78" stroke="#eef2f6" stroke-width="6" fill="none"></circle>
+                <circle id="radial" cx="90" cy="90" r="78" stroke="var(--accent)" stroke-width="6" fill="none" stroke-linecap="round" stroke-dasharray="490" stroke-dashoffset="490" transform="rotate(-90 90 90)"></circle>
+              </svg>
+              <div style="text-align:center;position:relative;z-index:2">
+                <div class="label">EMERGENCY SOS</div>
+                <div class="sub small">Hold to open quick request</div>
+              </div>
+            </button>
+
+            <div class="hold-bar" aria-hidden="true"><i id="holdLinear"></i></div>
+            <div id="sosHint" class="hint">Hold for 700ms to open quick details. Auto-fill with last blood type. Option to auto-send or manual review.</div>
+          </div>
+
+          <div class="quick" aria-label="Quick actions">
+            <div class="quick-scroll" role="list" id="quickList" tabindex="0">
+              <div class="card" role="listitem" tabindex="0" data-action="reserve">
+                <div class="qc-icon" aria-hidden="true"></div>
+                <div class="qc-title">Reserve at Bank</div>
+                <div class="qc-sub">One-tap hold</div>
+              </div>
+              <div class="card" role="listitem" tabindex="0" data-action="donors">
+                <div class="qc-icon" aria-hidden="true"></div>
+                <div class="qc-title">Find Donors</div>
+                <div class="qc-sub">Verified nearby</div>
+              </div>
+              <div class="card" role="listitem" tabindex="0" data-action="eligibility">
+                <div class="qc-icon" aria-hidden="true"></div>
+                <div class="qc-title">Check Eligibility</div>
+                <div class="qc-sub">When can I donate?</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="status" aria-label="Status">
+            <div class="status-card">
+              <div style="font-weight:800">Nearby stock</div>
+              <div class="small">O+ • Several within 5 km</div>
+              <div class="meter" style="margin-top:8px"><i></i></div>
+              <div class="small" style="margin-top:6px">Updated 6m ago</div>
+            </div>
+          </div>
+
+        </section>
+      </main>
+
+      <div class="spacer"></div>
+
+      <nav class="bottom" role="navigation" aria-label="Main navigation">
+        <div class="nav-item"><div class="nav-icon"></div><div class="small">Home</div></div>
+        <div class="nav-item"><div class="nav-icon"></div><div class="small">Search</div></div>
+        <div style="width:64px"></div>
+        <div class="nav-item"><div class="nav-icon"></div><div class="small">History</div></div>
+        <div class="nav-item"><div class="nav-icon"></div><div class="small">Profile</div></div>
+      </nav>
+
+    </div>
+  </div>
+
+  <!-- Pop card -->
+  <div id="popBack" class="pop-back" aria-hidden="true">
+    <div class="pop" role="dialog" aria-modal="true" aria-labelledby="popTitle" tabindex="-1">
+      <div id="popTitle" style="font-weight:800">Quick Request</div>
+      <div class="small" style="margin-top:6px">Auto-fill helps speed matching. Choose Auto-send for fastest help or Search manually to review matches.</div>
+
+      <div class="field">
+        <label class="small">Blood type</label>
+        <select id="popBlood" class="input" aria-label="Blood type select">
+          <option>O+</option><option>A+</option><option>B+</option><option>AB+</option><option>O-</option><option>Any</option>
+        </select>
+      </div>
+
+      <div class="row">
+        <div style="flex:1" class="field"><label class="small">Units</label><input id="popUnits" class="input" type="number" min="1" value="1" aria-label="Units needed"></div>
+        <div style="flex:1" class="field"><label class="small">Urgency</label><select id="popUrgency" class="input" aria-label="Urgency"><option>Critical</option><option>Urgent</option><option>Soon</option></select></div>
+      </div>
+
+      <div class="field"><label class="small">Location</label><input id="popLocation" class="input" type="text" value="Auto-detected: Current location" aria-label="Location"></div>
+
+      <div class="field" style="display:flex;align-items:center;justify-content:space-between">
+        <div class="switch"><input id="popAuto" type="checkbox" checked aria-label="Auto-send toggle"><label for="popAuto" class="small">Auto-send now (recommended)</label></div>
+        <button id="popCancel" class="btn" aria-label="Cancel quick request">Cancel</button>
+      </div>
+
+      <div style="display:flex;gap:8px;justify-content:flex-end;margin-top:10px">
+        <button id="popManual" class="btn" aria-label="Search manually">Search manually</button>
+        <button id="popSend" class="btn primary" aria-label="Send quick request">Send</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Results (manual path) -->
+  <div id="results" class="results" role="region" aria-live="polite" aria-atomic="true">
+    <div style="font-weight:800" id="resultsTitle">Matches</div>
+    <div class="result-card" role="article">
+      <div style="display:flex;gap:8px;align-items:center">
+        <div style="width:44px;height:44;border-radius:8px;background:#f3f4f6;display:grid;place-items:center">🏥</div>
+        <div>
+          <div style="font-weight:700">City Blood Bank</div>
+          <div class="small">O+ • 3 units • 1.6 km • Updated 6m ago</div>
+        </div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:6px;align-items:flex-end">
+        <button class="btn" id="callBank">Call</button>
+        <button class="btn" id="routeBank">Route</button>
+      </div>
+    </div>
+
+    <div class="result-card" role="article">
+      <div style="display:flex;gap:8px;align-items:center">
+        <div style="width:44px;height:44;border-radius:8px;background:#f3f4f6;display:grid;place-items:center">🙂</div>
+        <div>
+          <div style="font-weight:700">Rahul — O+</div>
+          <div class="small">2.1 km • Verified • Last active 1h</div>
+        </div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:6px;align-items:flex-end">
+        <button class="btn" id="msgDonor">Message</button>
+        <button class="btn" id="callDonor">Call</button>
+      </div>
+    </div>
+
+    <div style="display:flex;justify-content:flex-end;margin-top:8px"><button class="btn" id="closeResults">Close</button></div>
+  </div>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <div id="live" class="sr-only" aria-live="polite" aria-atomic="true"></div>
+
+<script>
+// v2 base with pop card and required interactions
+const $ = s => document.querySelector(s);
+const $$ = s => document.querySelectorAll(s);
+const HOLD_MS = 700;
+const RADIAL_CIRC = 490;
+let holdTimer = null, holdStart = 0;
+
+// prefill values (simulate stored user data)
+let lastBlood = 'O+';
+$('#bloodChip').textContent = lastBlood;
+$('#popBlood').value = lastBlood;
+
+// radial + linear helpers
+function setRadial(pct){ const offset = RADIAL_CIRC * (1 - pct); $('#radial').style.strokeDashoffset = offset; }
+function setLinear(pct){ $('#holdLinear').style.width = Math.round(pct*100) + '%'; }
+
+// SOS hold behavior
+const sos = $('#sosBtn');
+sos.addEventListener('mousedown', startHold);
+sos.addEventListener('touchstart', startHold, {passive:false});
+document.addEventListener('mouseup', cancelHold);
+document.addEventListener('touchend', cancelHold);
+sos.addEventListener('keydown', e => { if(e.key === 'Enter') openPop(); });
+
+function startHold(e){
+  e.preventDefault();
+  if(!navigator.onLine){
+    // show offline modal (use results area for demo)
+    $('#results').style.display = 'block';
+    $('#resultsTitle').textContent = 'Offline — SMS fallback';
+    $('#live').textContent = 'Offline';
+    return;
+  }
+  holdStart = Date.now();
+  setRadial(0); setLinear(0);
+  holdTimer = setInterval(()=>{
+    const elapsed = Date.now() - holdStart;
+    const pct = Math.min(1, elapsed / HOLD_MS);
+    setRadial(pct);
+    setLinear(pct);
+    if(pct >= 1){
+      clearInterval(holdTimer); holdTimer = null;
+      // small delay then open pop
+      setTimeout(()=> openPop(), 80);
+    }
+  }, 16);
+}
+
+function cancelHold(){ if(holdTimer){ clearInterval(holdTimer); holdTimer = null; setRadial(0); setLinear(0); $('#live').textContent='Hold cancelled'; } }
+
+// open/close pop
+function openPop(){
+  $('#popBack').style.display = 'flex';
+  $('#popBack').setAttribute('aria-hidden','false');
+  $('#popBlood').focus();
+  $('#live').textContent = 'Quick request opened';
+}
+function closePop(){ $('#popBack').style.display = 'none'; $('#popBack').setAttribute('aria-hidden','true'); $('#sosBtn').focus(); $('#live').textContent='Quick request closed'; }
+
+$('#popCancel').addEventListener('click', ()=>{ closePop(); });
+
+// slide confirm (enable keyboard Enter as well)
+const slider = document.getElementById('slider');
+const knob = document.getElementById('knob');
+let dragging = false;
+function pointerDown(e){ dragging = true; }
+function pointerMove(e){ if(!dragging) return; /* visual handled in earlier v4 - simplified here */ }
+function pointerUp(e){ if(dragging){ dragging=false; /* simplified: assume confirm via Send btn for mid-fi */ } }
+
+// Pop actions: Manual search and Send (auto/manual)
+$('#popManual').addEventListener('click', ()=>{
+  closePop();
+  // Show results (manual review)
+  $('#results').style.display = 'block';
+  $('#resultsTitle').textContent = 'Matches — Manual Review';
+  $('#live').textContent = 'Manual search opened';
+  // focus first actionable element
+  setTimeout(()=> { $('#callBank').focus(); }, 120);
+});
+
+$('#popSend').addEventListener('click', ()=>{
+  const auto = $('#popAuto').checked;
+  const details = { blood: $('#popBlood').value, units: $('#popUnits').value, urgency: $('#popUrgency').value, location: $('#popLocation').value, auto };
+  closePop();
+  if(auto){
+    // Auto-send flow: show toast undo and results after small delay
+    showToastWithUndo('Auto-sent — Undo', ()=>{ undoAuto(); });
+    $('#live').textContent = 'Auto-sent request';
+    setTimeout(()=> { showAutoResults(details); }, 800);
+  } else {
+    // Manual: show results for review
+    $('#results').style.display = 'block';
+    $('#resultsTitle').textContent = `Matches for ${details.blood} — ${details.urgency}`;
+    setTimeout(()=> { $('#callBank').focus(); }, 120);
+  }
+});
+
+function showToastWithUndo(msg, undoCb){
+  $('#toast').innerHTML = msg + (undoCb ? ' <button id="undoBtn">Undo</button>' : '');
+  $('#toast').style.display = 'block';
+  if(undoCb){ $('#undoBtn').addEventListener('click', ()=>{ undoCb(); $('#toast').style.display='none'; }); }
+  setTimeout(()=>{ if($('#toast').style.display==='block') $('#toast').style.display='none'; }, 6000);
+}
+function showToast(msg){ $('#toast').innerHTML = msg; $('#toast').style.display='block'; setTimeout(()=>{ $('#toast').style.display='none'; }, 4000); }
+function undoAuto(){ $('#results').style.display='none'; $('#live').textContent = 'Auto-send undone'; }
+
+function showAutoResults(details){
+  $('#results').style.display = 'block';
+  $('#resultsTitle').textContent = `Auto matches — ${details.blood} • ${details.urgency}`;
+  setTimeout(()=> { $('#callBank').focus(); }, 120);
+}
+
+// Results interactions
+$('#closeResults').addEventListener('click', ()=>{ $('#results').style.display='none'; $('#sosBtn').focus(); $('#live').textContent='Results closed'; });
+$('#callBank').addEventListener('click', ()=>{ alert('Calling bank...'); });
+$('#routeBank').addEventListener('click', ()=>{ alert('Open maps...'); });
+$('#msgDonor').addEventListener('click', ()=>{ alert('Open chat...'); });
+$('#callDonor').addEventListener('click', ()=>{ alert('Calling donor...'); });
+
+// Simpler keyboard handling
+document.addEventListener('keydown', (e)=>{
+  if(e.key === 'Escape'){
+    if($('#popBack').style.display === 'flex'){ closePop(); }
+    if($('#results').style.display === 'block'){ $('#results').style.display='none'; }
+  }
+});
+
+// init state hide results/pop
+$('#results').style.display = 'none';
+$('#popBack').style.display = 'none';
+// ensure radial/linear initial state
+setRadial(0); setLinear(0);
+</script>
+</body>
+</html>
+"""
+
+with open(file_path, "w", encoding="utf-8") as f:
+    f.write(html)
+
+file_path

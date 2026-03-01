@@ -1,0 +1,13 @@
+Fonts used in this design:
+
+Font: Open Sans
+Author: Steve Matteson
+Url: https://fonts.google.com/specimen/Open+Sans
+
+Font: Yanone Kaffeesatz
+Author: Yanone,Cyreal
+Url: https://fonts.google.com/specimen/Yanone+Kaffeesatz
+
+Font: Shippori Antique
+Author: FONTDASU
+Url: https://fonts.google.com/specimen/Shippori+Antique

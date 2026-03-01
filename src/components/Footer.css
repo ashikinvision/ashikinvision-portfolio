@@ -1,0 +1,399 @@
+/* 
+   ==========================================================================
+   PLAYFUL VIBRANT FOOTER
+   Recovering the 'Hero Vibe'
+   ========================================================================== 
+*/
+
+.footer-playful {
+    background-color: var(--charcoal);
+    color: var(--white);
+    padding: 0 0 var(--space-8);
+    position: relative;
+    overflow: hidden;
+    /* Important: Ensure seamless blend */
+    margin-top: -5px;
+    /* Pull up to cover any pixel gaps */
+}
+
+/* 
+   🌊 PARALLAX WAVES SYSTEM
+   ----------------------------------------
+   Industry standard layered SVG animation for realistic depth.
+*/
+.wave-container {
+    position: relative;
+    width: 100%;
+    height: 15vh;
+    /* Responsive height */
+    min-height: 150px;
+    max-height: 160px;
+    margin-bottom: -7px;
+    /* Fix vertical gap */
+    background: var(--lime);
+    /* Background acts as the 'Sky' or Previous Section */
+}
+
+.parallax-waves {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.parallax>use {
+    animation: move-forever 25s cubic-bezier(0.55, 0.5, 0.45, 0.5) infinite;
+    will-change: transform;
+    /* Performance Hint */
+}
+
+/* Layer 1: Back (Slowest, Transparent) */
+.parallax>use:nth-child(1) {
+    animation-delay: -2s;
+    animation-duration: 7s;
+    fill: rgba(44, 46, 42, 0.3);
+    /* Charcoal 30% */
+}
+
+/* Layer 2: Mid-Back */
+.parallax>use:nth-child(2) {
+    animation-delay: -3s;
+    animation-duration: 10s;
+    fill: rgba(44, 46, 42, 0.5);
+    /* Charcoal 50% */
+}
+
+/* Layer 3: Mid-Front */
+.parallax>use:nth-child(3) {
+    animation-delay: -4s;
+    animation-duration: 13s;
+    fill: rgba(44, 46, 42, 0.7);
+    /* Charcoal 70% */
+}
+
+/* Layer 4: Front (Fastest, Solid) */
+.parallax>use:nth-child(4) {
+    animation-delay: -5s;
+    animation-duration: 20s;
+    fill: var(--charcoal);
+    /* Solid Charcoal connecting to footer */
+}
+
+/* Keyframes for simple scrolling wave */
+@keyframes move-forever {
+    0% {
+        transform: translate3d(-90px, 0, 0);
+    }
+
+    100% {
+        transform: translate3d(85px, 0, 0);
+    }
+}
+
+
+/* 
+   🎨 BACKGROUND DECORATIONS
+   ----------------------------------------
+*/
+.footer-decorations {
+    position: absolute;
+    inset: 0;
+    top: 150px;
+    /* Start below wave */
+    pointer-events: none;
+    z-index: 0;
+}
+
+.footer-float-icon {
+    position: absolute;
+    font-size: 3rem;
+    opacity: 0.6;
+    color: var(--lime);
+}
+
+.icon-star {
+    top: 10%;
+    right: 15%;
+    color: var(--yellow);
+}
+
+.icon-circle {
+    bottom: 30%;
+    left: 10%;
+    color: var(--sky);
+    font-size: 1.5rem;
+}
+
+.icon-diamond {
+    top: 20%;
+    left: 50%;
+    color: var(--pink);
+    font-size: 2rem;
+    opacity: 0.4;
+}
+
+
+/* 
+   🏗️ BOTTOM GRID (Structure)
+   ----------------------------------------
+*/
+.footer-bottom {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 1fr;
+    gap: var(--space-16);
+    padding-top: var(--space-12);
+    position: relative;
+    z-index: 1;
+}
+
+/* 
+   🚀 INTERNAL CTA (Inside Brand Column)
+   ----------------------------------------
+*/
+.footer-cta-internal {
+    margin-top: var(--space-8);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-6);
+    align-items: flex-start;
+}
+
+.internal-cta-title {
+    font-size: clamp(2rem, 3vw, 2.5rem);
+    font-weight: 800;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    color: var(--white);
+    margin: 0;
+}
+
+.highlight-playful {
+    color: var(--lime);
+    text-shadow: 0 0 20px rgba(212, 255, 80, 0.2);
+}
+
+.playful-cta-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-3);
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--charcoal);
+    background: var(--lime);
+    padding: var(--space-3) var(--space-6);
+    border-radius: var(--radius-full);
+    text-decoration: none;
+    box-shadow: 0 4px 0 0 rgba(255, 255, 255, 0.2);
+    transition: transform 0.1s var(--ease-out-expo);
+}
+
+.playful-cta-btn:active {
+    transform: translateY(4px);
+    box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.2);
+}
+
+.btn-icon {
+    display: inline-block;
+}
+
+
+/* 
+   🔗 LINKS & CONTENT
+   ----------------------------------------
+*/
+.footer-brand-column {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+}
+
+.footer-logo {
+    font-size: var(--text-xl);
+    font-weight: 900;
+    color: var(--white);
+    text-decoration: none;
+    letter-spacing: -0.03em;
+}
+
+.text-lime {
+    color: var(--lime);
+}
+
+.text-pink {
+    color: var(--pink);
+}
+
+.footer-heading {
+    font-size: var(--text-xs);
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--lime);
+    margin-bottom: var(--space-5);
+    /* Reduced from space-8 to fix 'too far' */
+    font-weight: 800;
+}
+
+.footer-link {
+    display: block;
+    color: var(--white);
+    text-decoration: none;
+    font-size: var(--text-base);
+    font-weight: 600;
+    margin-bottom: var(--space-3);
+    transition: color 0.2s ease;
+}
+
+.footer-link:hover {
+    color: var(--pink);
+}
+
+.social-links-grid {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    /* Consistent vertical spacing between rows */
+}
+
+.footer-social-link {
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+    color: var(--white);
+    text-decoration: none;
+    font-size: var(--text-sm);
+    font-weight: 600;
+}
+
+/* 
+   📜 COPYRIGHT
+   ----------------------------------------
+*/
+.footer-copyright {
+    margin-top: var(--space-16);
+    padding-top: var(--space-6);
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    text-align: center;
+    font-size: var(--text-sm);
+    color: rgba(255, 255, 255, 0.4);
+    position: relative;
+    z-index: 1;
+    border-top: 1px dashed rgba(255, 255, 255, 0.1);
+}
+
+
+/* 
+   📱 RESPONSIVE
+   ----------------------------------------
+*/
+@media (max-width: 900px) {
+    .footer-bottom {
+        grid-template-columns: 1fr;
+        gap: var(--space-12);
+    }
+
+    .footer-cta-internal {
+        align-items: center;
+        text-align: center;
+    }
+
+    .internal-cta-title {
+        font-size: 2.5rem;
+    }
+
+    .footer-brand-column {
+        align-items: center;
+    }
+}
+
+
+/* 
+   ✉️ EMAIL LINK
+   ----------------------------------------
+*/
+.footer-email-link {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    color: var(--lime);
+    text-decoration: none;
+    font-size: var(--text-base);
+    font-weight: 600;
+    margin-bottom: var(--space-6);
+    padding: var(--space-3) var(--space-4);
+    background: rgba(212, 255, 80, 0.1);
+    border-radius: var(--radius-lg);
+    border: 1px solid rgba(212, 255, 80, 0.2);
+    transition: all 0.2s ease;
+}
+
+.footer-email-link:hover {
+    background: rgba(212, 255, 80, 0.2);
+    border-color: var(--lime);
+}
+
+.email-icon {
+    font-size: 1.2rem;
+}
+
+
+/* 
+   🔝 BACK TO TOP BUTTON
+   ----------------------------------------
+*/
+.back-to-top-btn {
+    position: fixed;
+    bottom: var(--space-8);
+    right: var(--space-8);
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    width: 60px;
+    height: 60px;
+    background: var(--lime);
+    color: var(--charcoal);
+    border: 3px solid var(--charcoal);
+    border-radius: var(--radius-full);
+    cursor: pointer;
+    box-shadow: 4px 4px 0 var(--charcoal);
+    transition: all 0.2s ease;
+}
+
+.back-to-top-btn:hover {
+    box-shadow: 6px 6px 0 var(--charcoal);
+}
+
+.back-to-top-btn:active {
+    transform: translateY(4px);
+    box-shadow: 0 0 0 var(--charcoal);
+}
+
+.back-to-top-arrow {
+    font-size: 1.2rem;
+    font-weight: 700;
+    line-height: 1;
+}
+
+.back-to-top-text {
+    font-size: 0.65rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+@media (max-width: 768px) {
+    .back-to-top-btn {
+        bottom: var(--space-4);
+        right: var(--space-4);
+        width: 50px;
+        height: 50px;
+    }
+
+    .back-to-top-text {
+        display: none;
+    }
+}

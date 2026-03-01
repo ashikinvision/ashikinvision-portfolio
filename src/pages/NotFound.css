@@ -1,0 +1,82 @@
+/* ==========================================================================
+   404 NOT FOUND PAGE
+   ========================================================================== */
+
+.not-found-page {
+    min-height: 100vh;
+    background: var(--bg-primary);
+}
+
+.not-found-main {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 80vh;
+    padding: var(--space-8);
+}
+
+.not-found-content {
+    text-align: center;
+    max-width: 500px;
+}
+
+.error-code {
+    display: block;
+    font-size: clamp(6rem, 15vw, 12rem);
+    font-weight: 800;
+    line-height: 1;
+    color: var(--lime);
+    letter-spacing: -0.05em;
+    margin-bottom: var(--space-4);
+}
+
+.not-found-content h1 {
+    font-size: var(--text-subtitle);
+    font-weight: 700;
+    color: var(--charcoal);
+    margin-bottom: var(--space-3);
+}
+
+.not-found-content p {
+    font-size: var(--text-base);
+    color: var(--charcoal-light);
+    line-height: 1.6;
+    margin-bottom: var(--space-8);
+}
+
+.not-found-actions {
+    display: flex;
+    gap: var(--space-4);
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.not-found-actions .btn-primary,
+.not-found-actions .btn-secondary {
+    padding: var(--space-3) var(--space-6);
+    border-radius: var(--radius-full);
+    font-weight: 700;
+    font-size: var(--text-sm);
+    transition: all 0.2s ease;
+}
+
+.not-found-actions .btn-primary {
+    background: var(--charcoal);
+    color: var(--white);
+}
+
+.not-found-actions .btn-primary:hover {
+    background: var(--lime);
+    color: var(--charcoal);
+}
+
+.not-found-actions .btn-secondary {
+    background: transparent;
+    color: var(--charcoal);
+    border: 2px solid var(--charcoal);
+}
+
+.not-found-actions .btn-secondary:hover {
+    background: var(--charcoal);
+    color: var(--white);
+}

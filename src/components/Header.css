@@ -1,0 +1,413 @@
+/* 
+   ==========================================================================
+   HEADER - ULTIMATE PLAYFUL NAVBAR
+   Colorful, bouncy, animated, with mobile menu
+   ========================================================================== 
+*/
+
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: var(--z-header);
+    padding: var(--space-3) 0;
+}
+
+/* Transparent Background - adapts to page background */
+.header::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: transparent;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-bottom: none;
+    z-index: -1;
+    transition: all 0.3s ease;
+}
+
+[data-theme="dark"] .header::before {
+    background: transparent;
+    border-bottom: none;
+}
+
+.header-container {
+    max-width: var(--container-width);
+    margin: 0 auto;
+    padding-inline: var(--container-padding);
+    height: 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* 
+   🏷️ LOGO - Animated with icon
+   ----------------------------------------
+*/
+.logo {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    font-size: var(--text-lg);
+    font-weight: 800;
+    color: var(--charcoal);
+    letter-spacing: -0.03em;
+    padding: var(--space-2);
+    transition: all 0.3s var(--ease-elastic);
+}
+
+.logo-icon {
+    font-size: 1.4rem;
+    animation: logo-spin 8s linear infinite;
+    color: var(--lime-dark);
+}
+
+@keyframes logo-spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    25% {
+        transform: rotate(90deg);
+    }
+
+    50% {
+        transform: rotate(180deg);
+    }
+
+    75% {
+        transform: rotate(270deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.logo:hover {
+    transform: scale(1.02);
+}
+
+.logo:hover .logo-icon {
+    animation-duration: 2s;
+}
+
+/* 
+   🧭 DESKTOP NAVIGATION - WCAG Accessible
+   ----------------------------------------
+   Contrast ratios optimized for lime green background
+*/
+.nav-desktop {
+    display: flex;
+    gap: var(--space-1);
+    padding: var(--space-1);
+    background: rgba(255, 255, 255, 0.25);
+    border-radius: var(--radius-full);
+    backdrop-filter: blur(8px);
+}
+
+.nav-link {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    padding: var(--space-2) var(--space-4);
+    font-size: var(--text-sm);
+    font-weight: 700;
+    color: #1a1a1a;
+    /* Dark text for WCAG AAA (7:1 contrast on lime) */
+    border-radius: var(--radius-full);
+    transition: all 0.2s ease;
+    position: relative;
+    z-index: 1;
+}
+
+.nav-icon {
+    font-size: 0.7rem;
+    opacity: 0;
+    transform: scale(0);
+    transition: all 0.3s var(--ease-elastic);
+    color: #1a1a1a;
+}
+
+.nav-link:hover .nav-icon {
+    opacity: 1;
+    transform: scale(1);
+}
+
+.nav-link:hover {
+    color: #000000;
+    background: rgba(255, 255, 255, 0.4);
+}
+
+/* Active background pill - White for clear visibility */
+.nav-active-bg {
+    position: absolute;
+    inset: 0;
+    background: #ffffff;
+    border-radius: var(--radius-full);
+    z-index: -1;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.nav-link.active {
+    color: #000000;
+    font-weight: 800;
+}
+
+.nav-link.active .nav-icon {
+    opacity: 1;
+    transform: scale(1);
+    color: var(--charcoal);
+}
+
+/* 
+   🔘 CTA BUTTON & ACTIONS
+   ----------------------------------------
+*/
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+}
+
+.cta-button {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    padding: var(--space-3) var(--space-5);
+    background: var(--charcoal);
+    color: var(--white);
+    font-size: var(--text-sm);
+    font-weight: 600;
+    border-radius: var(--radius-full);
+    box-shadow: 0 4px 0 0 rgba(0, 0, 0, 0.2);
+    transition: all 0.2s var(--ease-bounce);
+}
+
+.cta-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 0 0 rgba(0, 0, 0, 0.15);
+}
+
+.cta-button:active {
+    transform: translateY(1px);
+    box-shadow: 0 2px 0 0 rgba(0, 0, 0, 0.2);
+}
+
+.cta-arrow {
+    transition: transform 0.3s ease;
+}
+
+.cta-button:hover .cta-arrow {
+    transform: translateX(3px);
+}
+
+/* 
+   🍔 HAMBURGER MENU
+   ----------------------------------------
+*/
+.menu-toggle {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    width: 40px;
+    height: 40px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+    z-index: 1001;
+}
+
+.menu-toggle .bar {
+    width: 100%;
+    height: 3px;
+    background: var(--charcoal);
+    border-radius: 3px;
+    transition: all 0.3s var(--ease-elastic);
+    transform-origin: center;
+}
+
+.menu-toggle.open .bar:nth-child(1) {
+    transform: translateY(8px) rotate(45deg);
+    background: var(--lime);
+}
+
+.menu-toggle.open .bar:nth-child(2) {
+    opacity: 0;
+    transform: scaleX(0);
+}
+
+.menu-toggle.open .bar:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg);
+    background: var(--lime);
+}
+
+/* 
+   ✨ HEADER DECORATIONS
+   ----------------------------------------
+*/
+.header-deco {
+    position: absolute;
+    pointer-events: none;
+    opacity: 0.2;
+}
+
+.deco-1 {
+    width: 60px;
+    height: 60px;
+    border: 2px solid var(--pink);
+    border-radius: 50%;
+    top: 50%;
+    left: 20%;
+    transform: translateY(-50%);
+}
+
+.deco-2 {
+    width: 8px;
+    height: 8px;
+    background: var(--sky);
+    border-radius: 50%;
+    top: 50%;
+    right: 30%;
+    transform: translateY(-50%);
+}
+
+/* 
+   📱 MOBILE MENU OVERLAY
+   ----------------------------------------
+*/
+.mobile-menu {
+    position: fixed;
+    inset: 0;
+    background: var(--lime);
+    z-index: 999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.mobile-menu-content {
+    text-align: center;
+    position: relative;
+    z-index: 10;
+}
+
+.mobile-nav {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-6);
+}
+
+.mobile-nav-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-3);
+    font-size: var(--text-title);
+    font-weight: 800;
+    color: var(--charcoal);
+    transition: all 0.3s ease;
+}
+
+.mobile-nav-link:hover,
+.mobile-nav-link.active {
+    transform: scale(1.1);
+}
+
+.mobile-nav-icon {
+    font-size: 1.5rem;
+}
+
+.mobile-cta {
+    display: inline-block;
+    margin-top: var(--space-8);
+    padding: var(--space-4) var(--space-8);
+    background: var(--charcoal);
+    color: var(--white);
+    font-size: var(--text-lg);
+    font-weight: 700;
+    border-radius: var(--radius-full);
+    box-shadow: 0 6px 0 0 rgba(0, 0, 0, 0.2);
+    transition: all 0.3s var(--ease-bounce);
+}
+
+.mobile-cta:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 9px 0 0 rgba(0, 0, 0, 0.15);
+}
+
+/* Mobile menu blobs */
+.mobile-menu-blobs {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: -1;
+    overflow: hidden;
+}
+
+.menu-blob {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(100px);
+    opacity: 0.5;
+}
+
+.menu-blob.blob-pink {
+    width: 400px;
+    height: 400px;
+    background: var(--pink);
+    top: -20%;
+    right: -10%;
+}
+
+.menu-blob.blob-sky {
+    width: 350px;
+    height: 350px;
+    background: var(--sky);
+    bottom: -10%;
+    left: -15%;
+}
+
+.menu-blob.blob-yellow {
+    width: 300px;
+    height: 300px;
+    background: var(--yellow);
+    bottom: 30%;
+    right: 20%;
+}
+
+/* 
+   📱 RESPONSIVE
+   ----------------------------------------
+*/
+@media (max-width: 968px) {
+    .nav-desktop {
+        display: none;
+    }
+
+    .cta-button {
+        display: none;
+    }
+
+    .menu-toggle {
+        display: flex;
+    }
+
+    .header-deco {
+        display: none;
+    }
+}
+
+@media (max-width: 480px) {
+    .logo-text {
+        font-size: var(--text-base);
+    }
+
+    .mobile-nav-link {
+        font-size: var(--text-subtitle);
+    }
+}

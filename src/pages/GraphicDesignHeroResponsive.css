@@ -1,0 +1,55 @@
+/* Responsive Styles for Featured Hero */
+@media (max-width: 768px) {
+    .featured-hero {
+        height: 55vh;
+        min-height: 400px;
+    }
+
+    .featured-info h2 {
+        font-size: 2rem;
+    }
+
+    .featured-content {
+        bottom: 40px;
+    }
+
+    .hero-tagline {
+        top: 16px;
+    }
+
+    .hero-tagline p {
+        font-size: 0.85rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .featured-hero {
+        height: 50vh;
+        min-height: 350px;
+    }
+
+    .featured-info h2 {
+        font-size: 1.5rem;
+    }
+
+    .featured-label {
+        font-size: 0.65rem;
+    }
+
+    .featured-category {
+        font-size: 0.9rem;
+    }
+
+    .carousel-indicators {
+        gap: 6px;
+        margin-top: 16px;
+    }
+
+    .carousel-indicators .indicator {
+        width: 24px;
+    }
+
+    .carousel-indicators .indicator.active {
+        width: 36px;
+    }
+}

@@ -1,0 +1,270 @@
+/* 
+   ==========================================================================
+   HOME PAGE - PLAYFUL VIBRANT STYLES
+   Matching Hero Section Vibe
+   ========================================================================== 
+*/
+
+.home-page {
+    min-height: 100vh;
+    background: var(--bg-primary);
+}
+
+/* 
+   ==============================
+   SELECTED WORK SECTION
+   ==============================
+*/
+.work-section {
+    position: relative;
+    padding: var(--space-24) 0;
+    background: var(--lime);
+    overflow: hidden;
+}
+
+/* 
+   🎨 BACKGROUND DECORATIONS
+   ----------------------------------------
+   Using lime variants for seamless continuation
+*/
+.work-decorations {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.work-blob {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(100px);
+    opacity: 0.4;
+    will-change: transform;
+    /* Performance Hint */
+}
+
+/* Use lime variants instead of contrasting colors */
+.work-blob.blob-1 {
+    width: 500px;
+    height: 500px;
+    background: var(--lime-light);
+    top: -10%;
+    right: -10%;
+}
+
+.work-blob.blob-2 {
+    width: 400px;
+    height: 400px;
+    background: var(--lime-dark);
+    bottom: 10%;
+    left: -10%;
+}
+
+.work-deco {
+    position: absolute;
+    font-size: 2rem;
+    opacity: 0.4;
+    z-index: 2;
+}
+
+.work-deco.deco-star {
+    top: 15%;
+    left: 8%;
+    color: var(--lime-dark);
+    font-size: 2.5rem;
+}
+
+.work-deco.deco-circle {
+    top: 40%;
+    right: 5%;
+    color: var(--coral);
+    font-size: 1.5rem;
+}
+
+.work-deco.deco-diamond {
+    bottom: 20%;
+    right: 15%;
+    color: var(--pink);
+    font-size: 2rem;
+}
+
+/* 
+   📝 SECTION HEADER - Playful Style
+   ----------------------------------------
+*/
+.work-header {
+    text-align: center;
+    margin-bottom: var(--space-16);
+    position: relative;
+    z-index: 10;
+}
+
+.work-label {
+    display: inline-block;
+    font-size: var(--text-sm);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--charcoal);
+    margin-bottom: var(--space-4);
+}
+
+.work-title {
+    font-size: var(--text-title);
+    font-weight: 800;
+    color: var(--charcoal);
+    margin-bottom: var(--space-4);
+    letter-spacing: -0.03em;
+}
+
+.work-title .highlight {
+    position: relative;
+    display: inline-block;
+}
+
+.work-title .highlight::after {
+    content: "";
+    position: absolute;
+    bottom: 0.1em;
+    left: -5%;
+    right: -5%;
+    height: 0.3em;
+    background: var(--lime);
+    z-index: -1;
+    border-radius: 4px;
+    transform: skewX(-3deg);
+}
+
+.work-subtitle {
+    font-size: var(--text-lg);
+    color: var(--charcoal);
+    max-width: 50ch;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+/* 
+   🎴 PROJECTS GRID
+   ----------------------------------------
+*/
+.projects-grid {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-8);
+    margin-bottom: var(--space-12);
+    position: relative;
+    z-index: 10;
+}
+
+/* 
+   🔘 VIEW ALL BUTTON - Playful
+   ----------------------------------------
+*/
+.view-all-container {
+    display: flex;
+    justify-content: center;
+    margin-top: var(--space-8);
+    position: relative;
+    z-index: 10;
+}
+
+.view-all-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-3);
+    padding: var(--space-4) var(--space-8);
+    background: var(--charcoal);
+    color: var(--white);
+    font-size: var(--text-base);
+    font-weight: 700;
+    border-radius: var(--radius-full);
+    box-shadow: 0 6px 0 0 rgba(0, 0, 0, 0.2);
+    transition: all 0.2s var(--ease-bounce);
+}
+
+.view-all-btn:hover {
+    background: var(--lime);
+    color: var(--charcoal);
+}
+
+.view-all-btn .arrow {
+    transition: transform 0.3s ease;
+    font-size: 1.2em;
+}
+
+.view-all-btn:hover .arrow {
+    transform: translateX(5px);
+}
+
+/* 
+   ⚫ EMPTY STATE - Playful
+   ----------------------------------------
+*/
+.empty-projects-state {
+    text-align: center;
+    padding: var(--space-16) var(--space-4);
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: var(--radius-xl);
+    border: 2px dashed var(--charcoal-light);
+    color: var(--charcoal-light);
+    font-size: var(--text-lg);
+}
+
+.empty-icon {
+    display: block;
+    font-size: 3rem;
+    margin-bottom: var(--space-4);
+    color: var(--lime-dark);
+    animation: sparkle 2s ease-in-out infinite;
+}
+
+@keyframes sparkle {
+
+    0%,
+    100% {
+        transform: scale(1) rotate(0deg);
+        opacity: 0.5;
+    }
+
+    50% {
+        transform: scale(1.2) rotate(180deg);
+        opacity: 1;
+    }
+}
+
+/* 
+   📱 RESPONSIVE
+   ----------------------------------------
+*/
+@media (max-width: 768px) {
+    .work-section {
+        padding: var(--space-16) 0;
+    }
+
+    .work-header {
+        margin-bottom: var(--space-10);
+    }
+
+    .work-title {
+        font-size: var(--text-subtitle);
+    }
+
+    .projects-grid {
+        gap: var(--space-6);
+    }
+
+    .work-blob.blob-1 {
+        width: 300px;
+        height: 300px;
+    }
+
+    .work-blob.blob-2 {
+        width: 250px;
+        height: 250px;
+    }
+
+    .work-deco {
+        font-size: 1.5rem;
+    }
+}

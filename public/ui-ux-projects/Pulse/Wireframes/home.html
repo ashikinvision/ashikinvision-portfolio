@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pulse App - Home</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f9fafb;
+      color: #111;
+    }
+    header {
+      padding: 1rem;
+      text-align: center;
+      font-weight: bold;
+      font-size: 1.2rem;
+      background: #ffffff;
+      border-bottom: 1px solid #eee;
+      position: sticky;
+      top: 0;
+    }
+    .status-bar {
+      background: #e0f7e9;
+      color: #056608;
+      padding: 0.5rem;
+      text-align: center;
+      font-size: 0.9rem;
+    }
+    .sos {
+      display: flex;
+      justify-content: center;
+      margin: 1.5rem 0;
+    }
+    .sos button {
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      border: none;
+      background: #ff3b30;
+      color: #fff;
+      font-size: 1.5rem;
+      font-weight: bold;
+      box-shadow: 0 6px 15px rgba(255, 59, 48, 0.3);
+    }
+    .quick-actions {
+      display: flex;
+      justify-content: space-around;
+      margin: 1rem;
+    }
+    .quick-actions button {
+      flex: 1;
+      margin: 0 0.5rem;
+      padding: 1rem;
+      border: none;
+      border-radius: 12px;
+      background: #ffffff;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      font-size: 0.9rem;
+    }
+    .card {
+      background: #ffffff;
+      margin: 1rem;
+      padding: 1rem;
+      border-radius: 12px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+    nav {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      display: flex;
+      justify-content: space-around;
+      background: #ffffff;
+      border-top: 1px solid #eee;
+      padding: 0.5rem 0;
+    }
+    nav button {
+      border: none;
+      background: none;
+      font-size: 0.9rem;
+      color: #333;
+    }
+    nav button.active {
+      color: #ff3b30;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <header>Pulse</header>
+  <div class="status-bar">Inventory: O+ available nearby</div>
+  
+  <div class="sos">
+    <button>EMERGENCY SOS</button>
+  </div>
+  
+  <div class="quick-actions">
+    <button>Find Banks</button>
+    <button>Nearby Donors</button>
+  </div>
+  
+  <div class="card">
+    <h3>Recent Updates</h3>
+    <p>2 new donors verified today</p>
+    <p>Blood Bank XYZ restocked A+</p>
+  </div>
+  
+  <div class="card">
+    <h3>Donation Tips</h3>
+    <p>Drink water before donating</p>
+    <p>Eat iron-rich food</p>
+  </div>
+  
+  <nav>
+    <button class="active">Home</button>
+    <button>Banks</button>
+    <button>Donors</button>
+    <button>Profile</button>
+  </nav>
+</body>
+</html>
