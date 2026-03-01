@@ -7,9 +7,6 @@ import { CONTACT_EMAIL, WHATSAPP_URL, LINKEDIN_URL, CONTACT_PHONE, CONTACT_PHONE
 import profileImage from '../assets/images/ashik-profile.jpg';
 import './Contact.css';
 
-// Formspree form ID — replace with your actual ID from formspree.io
-const FORMSPREE_ID = 'mykdajaz';
-
 interface ContactMethod {
     id: string;
     icon: string;
@@ -77,7 +74,7 @@ const Contact = () => {
         setFormStatus('sending');
 
         try {
-            const res = await fetch(`https://formspree.io/f/${FORMSPREE_ID}`, {
+            const res = await fetch('/api/contact', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(formData),
